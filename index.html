@@ -501,6 +501,10 @@
     white-space:nowrap;
   }
   .page-curtain.active .pc-sub{opacity:1;}
+  .page-curtain.plain .pc-eyebrow,
+  .page-curtain.plain .pc-code,
+  .page-curtain.plain .pc-mark,
+  .page-curtain.plain .pc-sub{display:none;}
 
   /* ---------- ENTITY REPORT — STANDALONE PAGE ---------- */
   .entity-page-view{
@@ -909,6 +913,7 @@
 <script>
   function goToEntitySection(){
     var curtain = document.getElementById('page-curtain');
+    curtain.classList.remove('plain');
     curtain.classList.add('active');
     document.body.style.overflow = 'hidden';
     setTimeout(function(){
@@ -923,18 +928,9 @@
   }
 
   function goHome(){
-    var curtain = document.getElementById('page-curtain');
-    curtain.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(function(){
-      document.getElementById('view-entity').style.display = 'none';
-      document.getElementById('view-home').style.display = 'block';
-      window.scrollTo(0,0);
-    }, 520);
-    setTimeout(function(){
-      curtain.classList.remove('active');
-      document.body.style.overflow = '';
-    }, 1050);
+    document.getElementById('view-entity').style.display = 'none';
+    document.getElementById('view-home').style.display = 'block';
+    window.scrollTo(0,0);
   }
 
   function navigateHome(sectionId){
@@ -944,18 +940,9 @@
       document.getElementById(sectionId).scrollIntoView({behavior:'smooth', block:'start'});
       return;
     }
-    var curtain = document.getElementById('page-curtain');
-    curtain.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(function(){
-      entityView.style.display = 'none';
-      homeView.style.display = 'block';
-      document.getElementById(sectionId).scrollIntoView({behavior:'auto', block:'start'});
-    }, 520);
-    setTimeout(function(){
-      curtain.classList.remove('active');
-      document.body.style.overflow = '';
-    }, 1050);
+    entityView.style.display = 'none';
+    homeView.style.display = 'block';
+    document.getElementById(sectionId).scrollIntoView({behavior:'auto', block:'start'});
   }
 
   function openReport(id){
